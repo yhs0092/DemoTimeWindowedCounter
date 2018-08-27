@@ -21,7 +21,7 @@ public class TimeWindowedCounterConcurrentTest {
     final int windowsSize = 3;
     TimeWindowedCounter timeWindowedCounter = new TimeWindowedCounter(windowsSize);
 
-    ExecutorService executor = Executors.newScheduledThreadPool(threadCount);
+    ExecutorService executor = Executors.newFixedThreadPool(threadCount);
     ArrayList<Callable<Boolean>> tasks = new ArrayList<>();
     for (int i = 0; i < threadCount; ++i) {
       tasks.add(() -> {
@@ -49,7 +49,7 @@ public class TimeWindowedCounterConcurrentTest {
     final int windowsSize = 10;
     TimeWindowedCounter timeWindowedCounter = new TimeWindowedCounter(windowsSize);
 
-    ExecutorService executor = Executors.newScheduledThreadPool(threadCount);
+    ExecutorService executor = Executors.newFixedThreadPool(threadCount);
     ArrayList<Callable<Boolean>> tasks = new ArrayList<>();
     for (int i = 0; i < threadCount - 1; ++i) {
       tasks.add(() -> {
@@ -95,7 +95,7 @@ public class TimeWindowedCounterConcurrentTest {
     List<Integer> totalCountRecorder = new ArrayList<>();
     timeWindowedCounter.slipHook = counter -> totalCountRecorder.add(counter.getTotal());
 
-    ExecutorService executor = Executors.newScheduledThreadPool(threadCount);
+    ExecutorService executor = Executors.newFixedThreadPool(threadCount);
     ArrayList<Callable<Boolean>> tasks = new ArrayList<>();
     for (int i = 0; i < threadCount - 1; ++i) {
       tasks.add(() -> {
